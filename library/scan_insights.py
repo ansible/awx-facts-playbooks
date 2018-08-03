@@ -41,7 +41,9 @@ def get_system_id(filname):
             pass
         finally:
             f.close()
-            return system_id.strip()
+            if system_id:
+                system_id = system_id.strip()
+            return system_id
 
 
 def main():
