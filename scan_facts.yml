@@ -11,12 +11,23 @@
     - name: "Scan services (Unix/Linux)"
       scan_services:
       when: ansible_os_family != "Windows"
+    - command: id
+      register: id_out
+
+    - debug:
+        msg: '{{ id_out.stdout }}'
+
     - name: "Scan files (Unix/Linux)"
+      become: true
       scan_files:
         paths: '{{ scan_file_paths }}'
         get_checksum: '{{ scan_use_checksum }}'
         recursive: '{{ scan_use_recursive }}'
       when: scan_file_paths is defined and ansible_os_family != "Windows"
+
+    - debug:
+        msg: '{{ ansible_facts }}'
+
     - name: "Scan Insights for Machine ID (Unix/Linux)"
       scan_insights:
       when: ansible_os_family != "Windows"

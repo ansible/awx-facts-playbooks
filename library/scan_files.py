@@ -122,6 +122,7 @@ def main():
             try:
                 st = os.stat(filepath)
             except OSError:
+                open('/tmp/toto', 'w').write('I failed')
                 continue
 
             mode = st.st_mode
@@ -156,8 +157,8 @@ def main():
                 'isuid'    : bool(mode & stat.S_ISUID),
                 'isgid'    : bool(mode & stat.S_ISGID),
             }
-            if get_checksum and stat.S_ISREG(mode) and os.access(filepath, os.R_OK):
-                d['checksum'] = module.sha1(filepath)
+            # if get_checksum and stat.S_ISREG(mode) and os.access(filepath, os.R_OK):
+            #     d['checksum'] = module.sha1(filepath)
             files.append(d)
     results = dict(ansible_facts=dict(files=files))
     module.exit_json(**results)
