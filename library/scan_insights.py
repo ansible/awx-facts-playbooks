@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import os
 from ansible.module_utils.basic import * # noqa
 
 DOCUMENTATION = '''
@@ -24,7 +25,11 @@ EXAMPLES = '''
 '''
 
 
-INSIGHTS_SYSTEM_ID_FILE='/etc/redhat-access-insights/machine-id'
+if os.path.exists('/etc/redhat-access-insights'):
+    INSIGHTS_SYSTEM_ID_FILE='/etc/redhat-access-insights/machine-id'
+else:
+    INSIGHTS_SYSTEM_ID_FILE='/etc/insights-client/machine-id'
+
 
 
 def get_system_id(filname):
