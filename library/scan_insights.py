@@ -24,7 +24,7 @@ EXAMPLES = '''
 '''
 
 
-INSIGHTS_SYSTEM_ID_FILE='/etc/redhat-access-insights/machine-id'
+INSIGHTS_SYSTEM_ID_FILE='/etc/machine-id'
 
 
 def get_system_id(filname):

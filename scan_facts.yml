@@ -1,4 +1,6 @@
 - hosts: all
+  environment:
+    TERM: 'xterm'
   vars:
     scan_use_checksum: false
     scan_use_recursive: false
